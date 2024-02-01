@@ -2,7 +2,7 @@ import { useGlobalContext } from "../context";
 import { BsHandThumbsUp } from "react-icons/bs";
 
 export default function Meals() {
-  const { meals, loading, handleSelectMeal, addToFavorites, removeFromFavorites } = useGlobalContext();
+  const { meals, loading, handleShowModal, addToFavorites} = useGlobalContext();
 
   return (
     <section className="section-center">
@@ -17,7 +17,7 @@ export default function Meals() {
           const { idMeal, strMeal: title, strMealThumb: image } = singleMeal;
           return (
             <article key={idMeal} className="single-meal">
-              <img src={image} alt={title} className="img" onClick={()=> handleSelectMeal(idMeal)}/>
+              <img src={image} alt={title} className="img" onClick={()=> handleShowModal(idMeal)}/>
               <footer>
                 <h5>{title}</h5>
                 <button className="like-btn">

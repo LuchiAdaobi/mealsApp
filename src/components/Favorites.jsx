@@ -1,7 +1,7 @@
 import { useGlobalContext } from "../context";
 
 export default function Favorites() {
-  const{favorites, handleSelectMeal, removeFromFavorites} = useGlobalContext()
+  const{favorites, handleShowModal, removeFromFavorites} = useGlobalContext()
   return (
     <section className="favorites">
       <div className="favorites-content">
@@ -12,7 +12,7 @@ export default function Favorites() {
 
             return(
               <div key={idMeal} className="favorite-item">
-                <img src={image} alt={title} className="favorites-img img" onClick={()=> handleSelectMeal(idMeal)}/>
+                <img src={image} alt={title} className="favorites-img img" onClick={()=> handleShowModal(idMeal)}/>
                 <button className="remove-btn" onClick={()=> removeFromFavorites(idMeal)}>remove</button>
               </div>
             )

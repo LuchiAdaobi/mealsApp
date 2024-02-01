@@ -10,12 +10,24 @@ const AppProvider = ({ children }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [selectedMeal, setSelectedMeal] = useState(null);
-  const [favorites, setFavorites] = useState([]);
+  const [favorites, setFavorites] = useState(
+    JSON.parse(localStorage.getItem("favorites")) || []
+  );
 
   // VARIABLES
 
   const allMealsUrl = "https://www.themealdb.com/api/json/v1/1/search.php?s=";
   const randomMealUrl = "https://www.themealdb.com/api/json/v1/1/random.php";
+
+  //   USEEFFECT
+  useEffect(() => {
+    fetchMeals(allMealsUrl);
+  }, []);
+
+  useEffect(() => {
+    if (!searchTerm) return;
+    fetchMeals(`${allMealsUrl}${searchTerm}`);
+  }, [searchTerm]);
 
   // FUNCTION
 
@@ -38,7 +50,7 @@ const AppProvider = ({ children }) => {
     fetchMeals(randomMealUrl);
   }
 
-  function handleSelectMeal(idMeal, favorites) {
+  function handleShowModal(idMeal, favorites) {
     let meal;
 
     if (favorites) {
@@ -58,23 +70,15 @@ const AppProvider = ({ children }) => {
     if (alreadyFav) return;
     const meal = meals.find((meal) => meal.idMeal === idMeal);
 
-    const updateFavorites = [...favorites, meal];
-    setFavorites(updateFavorites);
+    const updatedFavorites = [...favorites, meal];
+    setFavorites(updatedFavorites);
+    localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
   }
   function removeFromFavorites(idMeal) {
-    const updateFavorites = favorites.filter((meal) => meal.idMeal !== idMeal);
-    setFavorites(updateFavorites);
+    const updatedFavorites = favorites.filter((meal) => meal.idMeal !== idMeal);
+    setFavorites(updatedFavorites);
+    localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
   }
-
-  //   USEEFFECT
-  useEffect(() => {
-    fetchMeals(allMealsUrl);
-  }, []);
-
-  useEffect(() => {
-    if (!searchTerm) return;
-    fetchMeals(`${allMealsUrl}${searchTerm}`);
-  }, [searchTerm]);
 
   return (
     <AppContext.Provider
@@ -85,7 +89,7 @@ const AppProvider = ({ children }) => {
         fetchRandomMeal,
         showModal,
         selectedMeal,
-        handleSelectMeal,
+        handleShowModal,
         closeModal,
         addToFavorites,
         removeFromFavorites,
