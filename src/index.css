@@ -241,7 +241,9 @@ ul {
   max-width: var(--max-width);
   margin: 0 auto;
 }
-
+.section-center h4{
+    font-size: .9rem;
+  }
 .section-center {
   display: grid;
   gap: 2rem;
@@ -263,6 +265,9 @@ ul {
   }
   .section-center {
     grid-template-columns: 1fr 1fr;
+  }
+  .section-center h4{
+    font-size: 1.3rem;
   }
 }
 @media screen and (min-width: 992px) {
@@ -309,8 +314,8 @@ ul {
   transform: translateY(-2px);
 }
 /* Modal */
-
-/* .modal-overlay{
+ 
+.modal-overlay{
   position:fixed;
   top:0;
   left:0;
@@ -354,4 +359,4 @@ ul {
 .close-btn{
   background:var(--red-dark);
   color:var(--white);
-}  */
+}   
