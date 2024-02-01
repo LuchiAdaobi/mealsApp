@@ -10,6 +10,7 @@ const AppProvider = ({ children }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [selectedMeal, setSelectedMeal] = useState(null);
+  const [favorites, setFavorites] = useState([]);
 
   // VARIABLES
 
@@ -37,7 +38,7 @@ const AppProvider = ({ children }) => {
     fetchMeals(randomMealUrl);
   }
 
-  function handleSelectMeal(idMeal) {
+  function handleSelectMeal(idMeal, favorites) {
     let meal;
 
     meal = meals.find((meal) => meal.idMeal === idMeal);
@@ -45,8 +46,21 @@ const AppProvider = ({ children }) => {
     setSelectedMeal(meal);
     setShowModal(true);
   }
-  function closeModal(){
-    setShowModal(false)
+  function closeModal() {
+    setShowModal(false);
+  }
+  function addToFavorites(idMeal) {
+    console.log(idMeal);
+    const alreadyFav = favorites.find((favMeal) => favMeal.idMeal === idMeal);
+    if (alreadyFav) return;
+    const meal = meals.find((meal) => meal.idMeal === idMeal);
+
+    const updateFavorites = [...favorites, meal];
+    setFavorites(updateFavorites);
+  }
+  function removeFromFavorites(idMeal) {
+    const updateFavorites = favorites.filter((meal) => meal.idMeal !== idMeal);
+    setFavorites(updateFavorites);
   }
 
   //   USEEFFECT
@@ -70,6 +84,9 @@ const AppProvider = ({ children }) => {
         selectedMeal,
         handleSelectMeal,
         closeModal,
+        addToFavorites,
+        removeFromFavorites,
+        favorites
       }}
     >
       {children}

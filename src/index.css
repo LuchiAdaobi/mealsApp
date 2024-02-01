@@ -197,7 +197,7 @@ ul {
 }
 
 /* Favorites */
-/* .favorites{
+.favorites{
   background:var(--black);
   color:var(--white);
   padding:1rem 0;
@@ -233,6 +233,7 @@ ul {
 .remove-btn:hover{
   color:var(--red-dark)
 }
+
 /* Meals */
 .section,
 .section-center {
