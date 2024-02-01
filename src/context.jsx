@@ -41,7 +41,11 @@ const AppProvider = ({ children }) => {
   function handleSelectMeal(idMeal, favorites) {
     let meal;
 
-    meal = meals.find((meal) => meal.idMeal === idMeal);
+    if (favorites) {
+      meal = favorites.find((meal) => meal.idMeal === idMeal);
+    } else {
+      meal = meals.find((meal) => meal.idMeal === idMeal);
+    }
 
     setSelectedMeal(meal);
     setShowModal(true);
@@ -50,7 +54,6 @@ const AppProvider = ({ children }) => {
     setShowModal(false);
   }
   function addToFavorites(idMeal) {
-    console.log(idMeal);
     const alreadyFav = favorites.find((favMeal) => favMeal.idMeal === idMeal);
     if (alreadyFav) return;
     const meal = meals.find((meal) => meal.idMeal === idMeal);
@@ -86,7 +89,7 @@ const AppProvider = ({ children }) => {
         closeModal,
         addToFavorites,
         removeFromFavorites,
-        favorites
+        favorites,
       }}
     >
       {children}
