@@ -3,7 +3,6 @@ import { BsHandThumbsUp } from "react-icons/bs";
 
 export default function Meals() {
   const { meals, loading } = useGlobalContext();
-  console.log(meals);
 
   return (
     <section className="section-center">

@@ -7,6 +7,7 @@ const AppProvider = ({ children }) => {
   //   STATE
   const [meals, setMeals] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('')
 
   // VARIABLES
 
@@ -30,11 +31,11 @@ const AppProvider = ({ children }) => {
 
   //   USEEFFECT
   useEffect(() => {
-    fetchMeals(allMealsUrl);
-  }, []);
+    fetchMeals(`${allMealsUrl}${searchTerm}`);
+  }, [searchTerm]);
 
   return (
-    <AppContext.Provider value={{ meals, loading }}>
+    <AppContext.Provider value={{ meals, loading, setSearchTerm }}>
       {children}
     </AppContext.Provider>
   );

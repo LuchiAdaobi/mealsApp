@@ -165,7 +165,7 @@ ul {
 /* End Of Global Styles */
 
 /* Search */
-/* .search-container{
+.search-container{
   height:5rem;
   background:var(--white);
   display:flex;
@@ -185,6 +185,7 @@ ul {
   border-radius:var(--borderRadius);
   background:var(--backgroundColor);
   border:1px solid var(--grey-200);
+  outline: none;
 }
 ::placeholder{
   font-family:inherit;
@@ -192,7 +193,8 @@ ul {
 }
 .search-container .btn{
   font-size:0.75rem;
-}
+} 
+
 /* Favorites */
 /* .favorites{
   background:var(--black);
