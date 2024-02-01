@@ -1,27 +1,40 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import axios from "axios";
 
 const AppContext = React.createContext();
 
 const AppProvider = ({ children }) => {
-//   const fetchData = async () => {
-//     try {
-//       const response = await fetch("https://randomuser.me/api/");
-//       const data = await response.json();
-//       console.log(data);
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   };
-//   useEffect(() => {
-//     fetchData();
-//   }, []);
+  //   STATE
+  const [meals, setMeals] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  // VARIABLES
+
+  const allMealsUrl = "https://www.themealdb.com/api/json/v1/1/search.php?s=";
+  const randomMealsUrl = "https://www.themealdb.com/api/json/v1/1/random.php";
+
+  const fetchMeals = async (url) => {
+    setLoading(true);
+    try {
+      const { data } = await axios(url);
+      if (data.meals) {
+        setMeals(data.meals);
+      } else{
+        setMeals([])
+      }
+    } catch (error) {
+      console.log(error.response);
+    }
+    setLoading(false);
+  };
+
+  //   USEEFFECT
+  useEffect(() => {
+    fetchMeals(allMealsUrl);
+  }, []);
 
   return (
-    <AppContext.Provider
-      value={{
-        name: "luchi",
-      }}
-    >
+    <AppContext.Provider value={{ meals, loading }}>
       {children}
     </AppContext.Provider>
   );
