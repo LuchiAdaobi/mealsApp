@@ -10,7 +10,7 @@ function App() {
   return (
     <main>
       <Search /> 
-      { favorites.length > 1 && <Favorites /> }
+      { favorites.length > 0 && <Favorites /> }
       <Meals />
      {showModal && <Modal />}
     </main>

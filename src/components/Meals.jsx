@@ -10,7 +10,7 @@ export default function Meals() {
         <h4>Loading...</h4>
       ) 
       : meals.length < 1 ? (
-        <h4 className="section">No meals matched your search term. Please try again.</h4>
+        <h4 className="section">No meals matched your search term. Please check your connection or try again.</h4>
       ) 
       : (
         meals.map((singleMeal) => {
